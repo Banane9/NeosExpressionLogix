@@ -1,6 +1,7 @@
 ﻿using BaseX;
 using FrooxEngine;
 using FrooxEngine.LogiX;
+using FrooxEngine.LogiX.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,9 @@ using System.Threading.Tasks;
 
 namespace ExpressionLogix
 {
-    public static partial class LogixValue
+    internal static class LogixValue
     {
-        public static IElementContent<T> CreateReference<T>(this Slot slot, T changeable) where T : class, IChangeable
-        {
-            var referenceNode = slot.AttachComponent<ReferenceNode<T>>();
-            referenceNode.RefTarget.Target = changeable;
-
-            return new LogixValue<T>(referenceNode, slot);
-        }
-
-        internal static LogixValue<T> Create<T>(IElementContent<T> element, Slot slot)
+        internal static IElementContent<T> Create<T>(IElementContent<T> element, Slot slot)
         {
             return new LogixValue<T>(element, slot);
         }

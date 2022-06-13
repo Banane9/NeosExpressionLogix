@@ -13,6 +13,8 @@
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
     <ProjectGuid>{0322B2EF-7452-479D-BAE2-FCAB75033337}</ProjectGuid>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,9 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExpressionLogix.Generators\ExpressionLogix.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false">
-      <Name>ExpressionLogix.Generators</Name>
-      <Project>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Project>
+    <ProjectReference Include="..\Generators\Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false">
+      <Name>Generators</Name>
+      <Project>{419B3410-6636-4CBC-BA93-5A86D641ABBB}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -62,10 +64,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpressionLogix.cs" />
+    <Compile Include="LogixReferences.cs" />
     <Compile Include="LogixValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Remove="Generated\**" />
+    <Content Include="Generated\**" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!--<Target Name="CleanSourceGeneratedFiles" BeforeTargets="BeforeBuild" DependsOnTargets="$(BeforeBuildDependsOn)">
+    <RemoveDir Directories="Generated" />
+  </Target>-->
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>

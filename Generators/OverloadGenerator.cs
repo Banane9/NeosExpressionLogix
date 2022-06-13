@@ -1,4 +1,4 @@
-﻿using ExpressionLogix.Generators.Analysis;
+﻿using Generators.Analysis;
 using Microsoft.CodeAnalysis;
 using System;
 using System.Diagnostics;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace ExpressionLogix.Generators
+namespace Generators
 {
     [Generator]
     public class OverloadGenerator : ISourceGenerator
@@ -33,7 +33,7 @@ namespace ExpressionLogix
 
                 foreach (var overload in overloadedNode.Value.Where(t => !t.ContainsGenericParameters))
                 {
-                    builder.AppendLine($@"        public static {overload.GetLogixNodeOutputs().Select(output => output.OutputType.Name).FirstOrDefault() ?? "void"} {function}(this {string.Join(", ", overload.GetLogixNodeInputs().Select(input => $"{input.InputType} {input.Name}"))})");
+                    builder.AppendLine($@"        public static {overload.GetLogixNodeOutputs().Select(output => output.OutputType.Name).FirstOrDefault() ?? "void"} {function}(this {string.Join(", ", overload.GetLogixNodeInputs().Select(input => $"{input.InputType.GetTypeName()} value"))})");
                     builder.AppendLine(@"        {");
 
                     builder.AppendLine(@"        }");

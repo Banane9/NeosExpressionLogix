@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace ExpressionLogix.Generators.Analysis
+namespace Generators.Analysis
 {
     internal static class LogixData
     {
